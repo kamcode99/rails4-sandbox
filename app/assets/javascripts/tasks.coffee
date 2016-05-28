@@ -1,13 +1,15 @@
 class Task
   constructor: (item) ->
-    @item = item
+    @item = $(item)
     @setEvents()
 
-  setEvent: ->
+  setEvents: ->
     @item.children("input[type='checkbox']").on "click", @handleToggle
 
   handleToggle: ->
-    
+    id = $(this).data("id")
+    console.log("Toggle checkbox #{id}")
+
 
 jQuery ->
   tasks = $.map $("li"), (item, index) ->
