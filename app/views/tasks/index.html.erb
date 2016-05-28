@@ -5,8 +5,8 @@
 
   <ul>
     <% @tasks.each do |task| %>
-      <li data-id="<%= task.id %>">
-        <%= check_box_tag :complete, 1, task.completed? %>
+      <li>
+        <%= check_box_tag :complete, 1, task.completed?, data: {id: task.id} %>
         <span>
           <% if task.completed? %>
             <del><%= task.description %></del>
