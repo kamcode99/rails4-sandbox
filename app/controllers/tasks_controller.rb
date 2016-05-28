@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
 
   # GET /tasks
   # GET /tasks.json
@@ -59,6 +59,13 @@ class TasksController < ApplicationController
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def complete
+    completed_at = @task.completed? ? nil : Time.zone.now
+    @task.update(completed_at: completed_at)
+
+    render json: { id: @task.id, completed: @task.completed?, description: @task.description }
   end
 
   private
