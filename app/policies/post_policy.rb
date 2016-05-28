@@ -1,11 +1,25 @@
 class PostPolicy < ApplicationPolicy
-  def create?
+  def index? 
     true
   end
 
-  def update?
-    user.present? && user == record.user
+  def create?
+    user.present? && user.admin?
   end
 
+  def update?
+    return true if user.present? && user.admin?
 
+    user.present? && user == post.user
+  end
+
+  def destroy?
+    user.present? && user.admin?
+  end
+
+  private
+
+    def post
+      record
+    end
 end

@@ -34,6 +34,6 @@
   # as an argument to policy
 %>
 
-<% if policy(Post).new? %>
+<% if policy(Post).create? %>
   <%= link_to 'New Post', new_post_path %>
 <% end %>
